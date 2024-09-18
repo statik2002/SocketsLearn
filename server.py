@@ -18,4 +18,14 @@ def disconnect(sid):
     print(f'Клиент {sid} отключен')
 
 
+@sio.on('message')
+def incoming_message(sid, data):
+    print(f'message {data} от клиента {sid}')
+
+
+@sio.on('*')
+def catch_all(event, sid, data):
+    sio.emit('error', {'message': f'No handler for event {event}'})
+
+
 eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
