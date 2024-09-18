@@ -8,6 +8,7 @@ app = socketio.WSGIApp(sio)
 @sio.event
 def connect(sid, environ):
     print(f'Клиент {sid} подключен')
+    print(f'Environ {environ}')
 
 
 @sio.event
